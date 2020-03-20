@@ -38,6 +38,18 @@ This command will execute create a detail report using htmlextra reporter inside
 
 You can launch it using like "live-server" to see it in more detail.
 
+#### Run in Docker
+Run below command to pull docker image
+```
+docker pull postman/newman;
+
+```
+Run collection
+```
+docker run -t postman/newman run https://www.getpostman.com/collections/591ff49755558f1103d2
+```
+
+
 ## Reporting
 
 **htmlextra**

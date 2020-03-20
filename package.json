@@ -1,0 +1,17 @@
+{
+  "name": "api-petstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generateReport": "newman run src/petstorecollection.json  -r htmlextra --reporter-htmlextra-darkTheme",
+    "test": "newman run src/petstorecollection.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^4.6.0",
+    "newman-reporter-htmlextra": "^1.12.1"
+  }
+}

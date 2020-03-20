@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "91c4ed6b-07a7-4436-b993-7635d6b8ec87",
+		"name": "PetStore API",
+		"description": "This is a sample server Petstore server Testing Collection. You can find out more about Swagger at https://petstore.swagger.io\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Pet Inventory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2598383-9235-43b6-8f99-2caca84ccf11",
+						"exec": [
+							"const schema = {",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+							"    \"$id\": \"http://example.com/example.json\",",
+							"    \"type\": \"object\",",
+							"    \"title\": \"The Root Schema\",",
+							"    \"description\": \"The root schema comprises the entire JSON document.\",",
+							"    \"required\": [",
+							"        \"sold\",",
+							"        \"string\",",
+							"        \"pending\",",
+							"        \"available\"",
+							"    ],",
+							"    \"properties\": {",
+							"        \"sold\": {",
+							"            \"$id\": \"#/properties/sold\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Sold Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                3",
+							"            ]",
+							"        },",
+							"        \"string\": {",
+							"            \"$id\": \"#/properties/string\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The String Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                191",
+							"            ]",
+							"        },",
+							"        \"pending\": {",
+							"            \"$id\": \"#/properties/pending\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Pending Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                3",
+							"            ]",
+							"        },",
+							"        \"available\": {",
+							"            \"$id\": \"#/properties/available\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Available Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                767",
+							"            ]",
+							"        }",
+							"    }",
+							"};",
+							"const response = pm.response.json();",
+							"",
+							"pm.test('Inventory Schema Validation', function() {",
+							"    ",
+							"    let result=tv4.validateResult(response, schema);",
+							"    pm.expect(result.valid).to.be.true;",
+							"})",
+							"",
+							"postman.setNextRequest('Create Pet Order')",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 5 seconds\", function () {",
+							"    pm.expect(responseTime < 5000).to.be.true;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/inventory",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"inventory"
+					]
+				},
+				"description": "https://petstore.swagger.io/v2/store/inventory"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Pet Order",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d486a357-09ab-417d-ab41-e47f334306df",
+						"exec": [
+							"const dateNow= new Date();",
+							"",
+							"const orderStatus = [",
+							"    'placed',",
+							"    'approved',",
+							"    'delivered'",
+							"];",
+							"",
+							"pm.collectionVariables.set('currentDate', dateNow.toISOString());",
+							"pm.collectionVariables.set(\"petId\", Math.floor(Math.random() * 100));",
+							"pm.collectionVariables.set(\"petQuantity\", Math.floor(Math.random() * 100 + 1));",
+							"pm.collectionVariables.set(\"orderStatus\",  orderStatus[Math.floor(Math.random()*orderStatus.length)]);",
+							"pm.collectionVariables.set(\"orderComplete\", _.sample([true, false]) );"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "98a3660a-2768-4b2b-bb2e-34ef15d3e4a6",
+						"exec": [
+							"//Getting response data",
+							"const orderData = pm.response.json();",
+							"const orderSchema = {",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+							"    \"$id\": \"http://example.com/example.json\",",
+							"    \"type\": \"object\",",
+							"    \"title\": \"The Root Schema\",",
+							"    \"description\": \"The root schema comprises the entire JSON document.\",",
+							"    \"required\": [",
+							"        \"id\",",
+							"        \"petId\",",
+							"        \"quantity\",",
+							"        \"shipDate\",",
+							"        \"status\",",
+							"        \"complete\"",
+							"    ],",
+							"    \"properties\": {",
+							"        \"id\": {",
+							"            \"$id\": \"#/properties/id\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Id Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                790367",
+							"            ]",
+							"        },",
+							"        \"petId\": {",
+							"            \"$id\": \"#/properties/petId\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Petid Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                96",
+							"            ]",
+							"        },",
+							"        \"quantity\": {",
+							"            \"$id\": \"#/properties/quantity\",",
+							"            \"type\": \"integer\",",
+							"            \"title\": \"The Quantity Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": 0,",
+							"            \"examples\": [",
+							"                52",
+							"            ]",
+							"        },",
+							"        \"shipDate\": {",
+							"            \"$id\": \"#/properties/shipDate\",",
+							"            \"type\": \"string\",",
+							"            \"title\": \"The Shipdate Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"2020-03-20T20:49:13.135+0000\"",
+							"            ]",
+							"        },",
+							"        \"status\": {",
+							"            \"$id\": \"#/properties/status\",",
+							"            \"type\": \"string\",",
+							"            \"title\": \"The Status Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"delivered\"",
+							"            ]",
+							"        },",
+							"        \"complete\": {",
+							"            \"$id\": \"#/properties/complete\",",
+							"            \"type\": \"boolean\",",
+							"            \"title\": \"The Complete Schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": false,",
+							"            \"examples\": [",
+							"                true",
+							"            ]",
+							"        }",
+							"    }",
+							"};",
+							"",
+							"//Getting random variables created in pre-request script",
+							"const petId = pm.collectionVariables.get('petId');",
+							"const petQuantity = pm.collectionVariables.get('petQuantity');",
+							"const orderStatus = pm.collectionVariables.get('orderStatus');",
+							"const orderComplete = pm.collectionVariables.get('orderComplete');",
+							"",
+							"//Test cases",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Order created succesfully with initial values', function() {",
+							"  pm.expect(orderData.petId).to.eql(petId);",
+							"  pm.expect(orderData.quantity).to.eql(petQuantity);",
+							"  pm.expect(orderData.status).to.eql(orderStatus);",
+							"  pm.expect(orderData.complete).to.eql(orderComplete);",
+							"  ",
+							"  pm.collectionVariables.set(\"orderId\", orderData.id);",
+							"  pm.collectionVariables.set(\"petId\", petId);",
+							"  pm.collectionVariables.set(\"petQuantity\", petQuantity);",
+							"  pm.collectionVariables.set(\"orderStatus\",  orderStatus);",
+							"  pm.collectionVariables.set(\"orderComplete\", orderComplete);",
+							"});",
+							"",
+							"pm.test('Order Schema Validation', function() {",
+							"    ",
+							"    var result=tv4.validateResult(orderData, orderSchema);",
+							"    if(!result.valid){",
+							"        console.log(result);",
+							"    }",
+							"    pm.expect(result.valid).to.be.true;",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 5 seconds\", function () {",
+							"    pm.expect(responseTime < 5000).to.be.true;",
+							"});",
+							"",
+							"//Setting next request",
+							"postman.setNextRequest('Get Pet Order')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/javascript",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 0,\n    \"petId\": \"{{petId}}\",\n    \"quantity\": \"{{petQuantity}}\",\n    \"shipDate\": \"{{currentDate}}\",\n    \"status\": \"{{orderStatus}}\",\n    \"complete\": \"{{orderComplete}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				},
+				"description": "https://petstore.swagger.io/v2/store/order"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pet Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd9eaf08-96c4-46e3-a3a7-3479ec9b5bd5",
+						"exec": [
+							"//Getting response data",
+							"const orderData = pm.response.json();",
+							"",
+							"",
+							"//Getting variables set in previous \"create pet order\" post script.",
+							"const orderId = pm.collectionVariables.get('orderId');",
+							"const petId = pm.collectionVariables.get('petId');",
+							"const petQuantity = pm.collectionVariables.get('petQuantity');",
+							"const orderStatus = pm.collectionVariables.get('orderStatus');",
+							"const orderComplete = pm.collectionVariables.get('orderComplete');",
+							"",
+							"//Test Cases",
+							"pm.test(\"Order Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Order previously created exist and has correct initial values', function() {",
+							"  pm.expect(orderData.id).to.eql(orderId);",
+							"  pm.expect(orderData.petId).to.eql(petId);",
+							"  pm.expect(orderData.quantity).to.eql(petQuantity);",
+							"  pm.expect(orderData.status).to.eql(orderStatus);",
+							"  pm.expect(orderData.complete).to.eql(orderComplete);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 5 seconds\", function () {",
+							"    pm.expect(responseTime < 5000).to.be.true;",
+							"});",
+							"",
+							"//Setting next request",
+							"postman.setNextRequest('Delete Pet Order')",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order",
+						"{{orderId}}"
+					]
+				},
+				"description": "https://petstore.swagger.io/v2/store/order/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Pet Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eee24423-f81a-4388-92f6-37c70458b5c0",
+						"exec": [
+							"//Getting response data",
+							"const jsonData = pm.response.json();",
+							"",
+							"//Test Cases",
+							"pm.test(\"Order has been deleted\", function () {",
+							"    pm.expect(jsonData.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 5 seconds\", function () {",
+							"    pm.expect(responseTime < 5000).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order/{{orderId}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order",
+						"{{orderId}}"
+					]
+				},
+				"description": "https://petstore.swagger.io/v2/store/order/1"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a4f0ef76-94dd-457f-973c-aa346967ac21",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "07616836-19ee-49b0-9a75-c24c420b2ac4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f1e26752-5308-43e6-a969-f0bc5ca72d6e",
+			"key": "petId",
+			"value": 68,
+			"type": "number"
+		},
+		{
+			"id": "162a5a04-056c-42ad-aeed-795d95ca08b7",
+			"key": "petQuantity",
+			"value": 51,
+			"type": "number"
+		},
+		{
+			"id": "52a31aae-7e1a-4921-b153-9676ed6166ed",
+			"key": "orderStatus",
+			"value": "approved",
+			"type": "string"
+		},
+		{
+			"id": "4b417b29-8ec1-4b00-98eb-b68cba70f591",
+			"key": "orderComplete",
+			"value": true,
+			"type": "boolean"
+		},
+		{
+			"id": "3c1a43b7-d37f-4c6d-811a-0fb5b8df75c3",
+			"key": "currentDate",
+			"value": "2020-03-20T23:28:14.592Z",
+			"type": "string"
+		},
+		{
+			"id": "99854818-b91d-4fe5-961b-d0cee0a44738",
+			"key": "orderId",
+			"value": 790434,
+			"type": "number"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -2,16 +2,20 @@
 
 This is Automated test which was build to test Pet Store API Functionality using postman and javascript.
 
+#### Test Notes 
+https://docs.google.com/document/d/1dx9fHDmeij6Vuva_LLNmZpj-F2PltupD7c1BUQFX_ks/edit?usp=sharing
+
 #### Language and Tool selection 
 
  I opted for Postman tool in particular due to the coding speed of the test cases , it provides a nice interface to debug issues , and nice reporting and plugins out of the box.  In comparison to other tools you have to write less and better code and dont worry so much about the request headers , I think it fits good for this challenge.
 
 Below a basic DAR (Decision Analysis Report) diagram detailing why we choose postman among other tools.
-![Image of Dar](https://i.ibb.co/vvXKPFR/Dar-Postman.png)
+![Image of Dar](https://i.ibb.co/RH31Cs5/Dar-Postman.png)
 
 The framework contains several node packagesand CI/CD file integration.
 
 Also Javascript is easy to debug using postman developer tools and the code is easier to read than other programming languages.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -65,8 +69,10 @@ docker run -t postman/newman run https://www.getpostman.com/collections/591ff497
 
 ## Reporting
 
-**htmlextra**
+You can find the **LIVE REPORT Here** : https://xfaramirx.github.io/PetStoreChallenge/ 
 
+Reporting Tool
+**htmlextra**
 https://www.npmjs.com/package/newman-reporter-htmlextra
 
 #### API Documentation generated

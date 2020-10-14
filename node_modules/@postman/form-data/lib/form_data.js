@@ -265,7 +265,7 @@ FormData.prototype._getContentDisposition = function(value, options) {
 
   // add "filename*" param if filename is not in ASCII
   if (NON_ASCII_REGEX.test(filename)) {
-    contentDisposition.push('filename*="' + this._encodeHeaderParam(filename) + '"');
+    contentDisposition.push('filename*=' + this._encodeHeaderParam(filename));
   }
 
   return contentDisposition;

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "generateReport": "newman run src/petstorecollection.json  -r htmlextra --reporter-htmlextra-darkTheme",
-    "test": "newman run src/petstorecollection.json"
+    "test": "newman run src/petstorecollection.json",
+    "build": "npm run test && npm run generateReport && node main.js",
+    "docker": "docker run -t postman/newman run https://www.getpostman.com/collections/508f21bd30fb0fa88c72",
+    "dockerReport": "docker-compose up && node main.js"
   },
   "keywords": [],
   "author": "",

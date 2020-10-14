@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: install-dependencies
-          command: npm install
+          command: yarn
       - newman/newman-run:
           collection: ./src/petstorecollection.json
           # additional-options: -r htmlextra

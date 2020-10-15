@@ -7,4 +7,4 @@ services:
     command: run petstorecollection.json
       -r htmlextra --reporter-htmlextra-darkTheme
     volumes:
-      - ./src:/etc/newman
+      - ./src:/newman

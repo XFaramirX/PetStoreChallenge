@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 services:
   postman_checks:
     container_name: restful_booker_checks
@@ -7,4 +7,4 @@ services:
     command: run petstorecollection.json
       -r htmlextra --reporter-htmlextra-darkTheme
     volumes:
-      - ./src:/etc/newman
+      - ./newman

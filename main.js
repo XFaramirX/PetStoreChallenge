@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-var dir = __dirname + "/src/newman/"; // your directory
+var dir = __dirname + '/newman/'; // your directory
 console.log(dir);
 
 var files = fs
@@ -24,7 +24,7 @@ var lastReportFile = fs.readFileSync(lastReportDir, (err, data) => {
   return data;
 });
 
-fs.writeFile("index.html", lastReportFile.toString(), (err) => {
+fs.writeFile('index.html', lastReportFile.toString(), (err) => {
   if (err) throw err;
-  console.log("The file has been saved!");
+  console.log('The file has been saved!');
 });

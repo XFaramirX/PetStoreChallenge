@@ -5,6 +5,6 @@ services:
     build: .
     image: postman_checks
     command: run petstorecollection.json
-      -r htmlextra --reporter-htmlextra-darkTheme-export ./newman
+      -r htmlextra --reporter-htmlextra-darkTheme-export ../newman
     volumes:
       - ./src:/etc/newman

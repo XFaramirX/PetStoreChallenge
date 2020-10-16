@@ -11,5 +11,5 @@ jobs:
           name: install-dependencies
           command: yarn
       - newman/newman-run:
-          collection: ./src/petstorecollection.json
+          collection: ./src/collection.json
           # additional-options: -r htmlextra

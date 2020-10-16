@@ -1,14 +1,14 @@
 {
-  "name": "api-petstore",
+  "name": "api-postman",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "generateReport": "newman run src/petstorecollection.json  -r htmlextra --reporter-htmlextra-darkTheme",
-    "test": "newman run src/petstorecollection.json",
+    "generateReport": "newman run src/collection.json  -r htmlextra --reporter-htmlextra-darkTheme",
+    "test": "newman run src/collection.json",
     "build": "npm run test && npm run generateReport && node main.js",
-    "docker": "docker run -t postman/newman run https://www.getpostman.com/collections/ ",
-    "dockerReport": "docker-compose up && node main.js && git commit -am 'Updated Report' && git push"
+    "docker": "docker run -t postman/newman run https://www.getpostman.com/collections/1f7eafe8fcba81325124",
+    "dockerReport": "docker-compose up && node main.js"
   },
   "keywords": [],
   "author": "",

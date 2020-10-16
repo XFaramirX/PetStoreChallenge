@@ -1,3 +1,5 @@
+//This file basically replaces the last generated report into the index.html file. 
+
 const fs = require('fs');
 const path = require('path');
 

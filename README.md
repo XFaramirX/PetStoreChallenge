@@ -2,7 +2,7 @@
 
 This is Automated test which was build to test Pet Store API Functionality using postman and javascript.
 
-The nodeJS project itself will ease out the process of generating automatic reports and can be use as a boilerPlate for API with postman projects. 
+The nodeJS project itself will ease out the process of generating automatic reports and can be use as a boilerPlate for API with postman projects.
 
 ## Getting Started
 
@@ -56,7 +56,7 @@ docker pull postman/newman;
 Run collection
 
 ```
-docker run -t postman/newman run https://www.getpostman.com/collections/508f21bd30fb0fa88c72
+docker run -t postman/newman run https://www.getpostman.com/collections/1f7eafe8fcba81325124
 ```
 
 Run collection inside docker and update live report.

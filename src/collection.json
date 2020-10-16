@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "df97c070-4eec-4de8-88bc-44a2e6e922da",
-		"name": "PetStore API",
+		"_postman_id": "223c4b84-f940-4ae5-9024-9e006e3f4712",
+		"name": "PostmanCollection",
 		"description": "This is a sample server Petstore server Testing Collection. You can find out more about Swagger at https://petstore.swagger.io\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "82e47c16-ced0-4d0e-a815-e46242ec795c",
+						"id": "259eac77-b124-4737-95f0-38241398fcbd",
 						"exec": [
 							"//Getting response data",
 							"var orderData = pm.response.json();",
@@ -48,26 +48,26 @@
 							"",
 							"",
 							"//Test cases",
-							"pm.test(\"Status code is 200\", function() {",
+							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test('Order created succesfully with initial values', function() {",
-							"    pm.expect(orderData.petId).to.eql(petId);",
-							"    pm.expect(orderData.quantity).to.eql(petQuantity);",
+							"pm.test('Order created succesfully with initial values', function () {",
+							"    pm.expect(orderData.petId).to.eql(parseInt(petId));",
+							"    pm.expect(orderData.quantity).to.eql(parseInt(petQuantity));",
 							"",
 							"});",
 							"",
-							"pm.test('Order contains proper status and completion values', function() {",
+							"pm.test('Order contains proper status and completion values', function () {",
 							"    pm.expect(orderData.status).to.eql(orderStatus);",
 							"    pm.expect(orderData.complete).to.eql(orderComplete);",
 							"});",
 							"",
-							"pm.test('Order Schema Validation', function() {",
+							"pm.test('Order Schema Validation', function () {",
 							"    pm.response.to.have.jsonSchema(schema);",
 							"})",
 							"",
-							"pm.test(\"Response time is less than 60s seconds\", function() {",
+							"pm.test(\"Response time is less than 60s seconds\", function () {",
 							"    pm.expect(responseTime < 60000).to.be.true;",
 							"});"
 						],
@@ -77,7 +77,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "618558d6-8fd8-41de-881a-bedf4de2f403",
+						"id": "50d01ed9-9e00-4dd3-9a5c-14cce25a56f0",
 						"exec": [
 							""
 						],
@@ -127,7 +127,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f5bfcb81-17f8-4ea0-9fec-97ed91ade8e8",
+						"id": "5ae6fa4a-2546-40ea-bca3-52a1293f58e1",
 						"exec": [
 							"//Getting response data",
 							"const jsonData = pm.response.json();",
@@ -175,7 +175,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "72c85c2e-d602-4d9f-902c-8c5d34a18af2",
+						"id": "34f8f119-bb31-4c23-958e-87d39cbb1b50",
 						"exec": [
 							""
 						],
@@ -185,7 +185,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fd50c143-b1f5-4992-9d07-25ce981f40fc",
+						"id": "035cc338-1b32-4460-896d-8244966cbe67",
 						"exec": [
 							"//Getting response data",
 							"const orderData = pm.response.json();",
@@ -199,24 +199,24 @@
 							"const orderComplete = pm.collectionVariables.get('orderComplete');",
 							"",
 							"//Test Cases",
-							"pm.test(\"Order Status code is 200\", function() {",
+							"pm.test(\"Order Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test('Order previously created exist and has correct initial values', function() {",
-							"    pm.expect(orderData.id).to.eql(orderId);",
+							"pm.test('Order previously created exist and has correct initial values', function () {",
+							"    pm.expect(parseInt(orderData.id)).to.eql(orderId);",
 							"    pm.expect(orderData.petId).to.eql(petId);",
 							"    pm.expect(orderData.quantity).to.eql(petQuantity);",
 							"    pm.expect(orderData.status).to.eql(orderStatus);",
 							"    pm.expect(orderData.complete).to.eql(orderComplete);",
 							"});",
 							"",
-							"pm.test(\"Deletes previous created pet order\", function() {",
+							"pm.test(\"Deletes previous created pet order\", function () {",
 							"    let url = \"https://petstore.swagger.io/v2/store/order/\".concat(orderId)",
 							"    pm.sendRequest({",
 							"        url: url,",
 							"        method: 'DELETE',",
-							"    }, function(err, res) {",
+							"    }, function (err, res) {",
 							"        console.log(res);",
 							"        pm.expect(res.code).to.eql(200);",
 							"        pm.expect(res.status).to.eql(\"OK\");",
@@ -255,7 +255,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8cdfb5a1-6d84-47c2-ac5e-568dac5625b7",
+						"id": "2040eef1-37a3-4ef4-a0f4-6ec60021b079",
 						"exec": [
 							"var response = pm.response.json();",
 							"",
@@ -320,7 +320,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "49f72c83-0d21-4b84-9770-51d3e42a06e4",
+				"id": "64f6c11b-fb3f-4d46-bb36-30e9378e5de5",
 				"type": "text/javascript",
 				"exec": [
 					"const dateNow= new Date();",
@@ -365,7 +365,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "fba0c018-881d-4d36-a3a8-25ae6b076b8d",
+				"id": "e8977137-dd77-45aa-ac79-3e55643e8a0f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -375,44 +375,52 @@
 	],
 	"variable": [
 		{
-			"id": "750bdba9-6f29-4875-9b69-b7aabeb7361c",
+			"id": "5c029d19-6edc-447f-aaac-4e05ce3eb0b9",
 			"key": "currentDate",
-			"value": ""
+			"value": "2020-10-16T17:24:08.472Z",
+			"type": "string"
 		},
 		{
-			"id": "b41526c5-b826-45f6-bb07-1659def91976",
+			"id": "a0a57a09-750f-43af-993e-c60607443b5e",
 			"key": "id",
-			"value": ""
+			"value": 7639,
+			"type": "number"
 		},
 		{
-			"id": "aa4d13fc-d7fb-4108-b43f-a8845acff252",
+			"id": "74362f19-8319-48d1-abac-73830961ece5",
 			"key": "orderComplete",
-			"value": false
+			"value": true,
+			"type": "boolean"
 		},
 		{
-			"id": "e0c7f9a5-6972-4b71-b5b6-9487f42b2aac",
+			"id": "48548f8d-ec3b-4190-94c2-9ff9b5081fd7",
 			"key": "orderStatus",
-			"value": ""
+			"value": "placed",
+			"type": "string"
 		},
 		{
-			"id": "1abc067a-0b09-4c64-8a1c-5be26bc1e09f",
+			"id": "31f624cc-0e28-4602-bb3a-3e120d988665",
 			"key": "petId",
-			"value": ""
+			"value": 61,
+			"type": "number"
 		},
 		{
-			"id": "9780c5dc-91c6-4b96-a536-5dafb59f1e35",
+			"id": "1052fc8a-751f-4901-ae0b-f196d9db43b6",
 			"key": "petQuantity",
-			"value": ""
+			"value": 44,
+			"type": "number"
 		},
 		{
-			"id": "d36edeed-6805-4216-94ce-10e8f2b81026",
+			"id": "aaa53d9b-2fa8-40f0-8cb4-0db3ddd243f6",
 			"key": "orderId",
-			"value": ""
+			"value": 7639,
+			"type": "number"
 		},
 		{
-			"id": "984b34cb-7751-4fbe-adf1-f37149943803",
+			"id": "13aae59e-d90d-40ae-95a2-e4e4b154d71a",
 			"key": "url",
-			"value": "https://petstore.swagger.io/v2/store"
+			"value": "https://petstore.swagger.io/v2/store",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -1,10 +1,10 @@
 version: '2'
 services:
   postman_checks:
-    container_name: petstorecollection
+    container_name: postmanCollection
     build: .
     image: postman_checks
-    command: run ./src/petstorecollection.json
+    command: run ./src/collection.json
       -r htmlextra --reporter-htmlextra-darkTheme
     volumes:
       - ./:/etc/newman

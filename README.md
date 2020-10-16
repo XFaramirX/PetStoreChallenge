@@ -2,9 +2,7 @@
 
 This is Automated test which was build to test Pet Store API Functionality using postman and javascript.
 
-#### Test Notes
-
-https://docs.google.com/document/d/1dx9fHDmeij6Vuva_LLNmZpj-F2PltupD7c1BUQFX_ks/edit?usp=sharing
+The nodeJS project itself will ease out the process of generating automatic reports and can be use as a boilerPlate for API with postman projects. 
 
 ## Getting Started
 
@@ -15,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 #### Clone repo
 
 ```
-git clone https://github.com/XFaramirX/PostmanPetStore.git
+git clone https://github.hugeinc.com/jbarrera/postman-automation 
 ```
 
 #### Install dependencies

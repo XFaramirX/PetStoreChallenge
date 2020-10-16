@@ -4,9 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "generateReport": "newman run src/collection.json  -r htmlextra --reporter-htmlextra-darkTheme",
+    "generateReport": "newman run src/collection.json  -r htmlextra --reporter-htmlextra-darkTheme && node main.js",
     "test": "newman run src/collection.json",
-    "build": "npm run test && npm run generateReport && node main.js",
     "docker": "docker run -t postman/newman run https://www.getpostman.com/collections/1f7eafe8fcba81325124",
     "dockerReport": "docker-compose up && node main.js"
   },

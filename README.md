@@ -2,7 +2,7 @@
 
 This is Automated test which was build to test Pet Store API Functionality using postman and javascript.
 
-The nodeJS project itself will ease out the process of generating automatic reports and can be use as a boilerPlate for API with postman projects.
+The nodeJS project itselfs will ease out the process of generating automatic reports and can be use as a boilerPlate for API with postman projects.
 
 ## Getting Started
 

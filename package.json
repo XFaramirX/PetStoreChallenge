@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "newman": "^4.6.0",
     "newman-reporter-htmlextra": "^1.12.1"
   }
 }

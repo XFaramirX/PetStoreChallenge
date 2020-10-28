@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-var dir = __dirname + '/newman/'; // your directory
+var dir = __dirname + '/newman/'; // your directory test
 console.log(dir);
 
 var files = fs

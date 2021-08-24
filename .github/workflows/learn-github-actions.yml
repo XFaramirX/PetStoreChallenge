@@ -8,3 +8,10 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run generateReport
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
+
+

@@ -1,5 +1,5 @@
 node_modules/
-
+postman_env_exec.json
 # Logs
 logs
 *.log

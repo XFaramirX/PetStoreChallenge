@@ -1,0 +1,24 @@
+{
+	"id": "56b845af-508f-4afc-8fa1-a3b2db3cda56",
+	"name": "Postman",
+	"values": [
+		{
+			"key": "url",
+			"value": "${HOST}",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "jbarrera@hugeinc.com",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "hugeinc",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-08-24T22:15:01.789Z",
+	"_postman_exported_using": "Postman/8.11.1"
+}

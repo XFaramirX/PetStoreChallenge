@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "223c4b84-f940-4ae5-9024-9e006e3f4712",
+		"_postman_id": "57290eb2-c7b0-457a-aaaa-0c11ba248103",
 		"name": "PostmanCollection",
 		"description": "This is a sample server Petstore server Testing Collection. You can find out more about Swagger at https://petstore.swagger.io\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -12,7 +12,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "259eac77-b124-4737-95f0-38241398fcbd",
 						"exec": [
 							"//Getting response data",
 							"var orderData = pm.response.json();",
@@ -77,9 +76,45 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "50d01ed9-9e00-4dd3-9a5c-14cce25a56f0",
 						"exec": [
-							""
+							"const dateNow= new Date();\r",
+							"\r",
+							"const orderStatus = [\r",
+							"    'placed',\r",
+							"    'approved',\r",
+							"    'delivered'\r",
+							"];\r",
+							"\r",
+							"pm.collectionVariables.set('currentDate', dateNow.toISOString());\r",
+							"pm.collectionVariables.set(\"id\", Math.floor(Math.random() * 100000));\r",
+							"pm.collectionVariables.set(\"petId\", Math.floor(Math.random() * 100));\r",
+							"pm.collectionVariables.set(\"petQuantity\", Math.floor(Math.random() * 100 + 1));\r",
+							"pm.collectionVariables.set(\"orderStatus\",  orderStatus[Math.floor(Math.random()*orderStatus.length)]);\r",
+							"pm.collectionVariables.set(\"orderComplete\", _.sample([true, false]) );\r",
+							"\r",
+							"\r",
+							"\r",
+							"const loginRequest = {\r",
+							"    url: 'https://petstore.swagger.io/v2/store/order',\r",
+							"    method: 'POST',\r",
+							"    header: 'Content-Type: application/json',\r",
+							"    body: {\r",
+							"        mode: 'application/json',\r",
+							"        raw: JSON.stringify({        \r",
+							"            \"id\": pm.collectionVariables.get(\"id\"),\r",
+							"            \"petId\": pm.collectionVariables.get(\"petId\"),\r",
+							"            \"quantity\": pm.collectionVariables.get(\"petQuantity\"),\r",
+							"            \"shipDate\": pm.collectionVariables.get(\"currentDate\"),\r",
+							"            \"status\": pm.collectionVariables.get(\"orderStatus\"),\r",
+							"            \"complete\": pm.collectionVariables.get(\"orderComplete\"),\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.sendRequest(loginRequest, function (err, response) {\r",
+							"    pm.collectionVariables.set(\"orderId\", response.json().id);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -122,60 +157,11 @@
 			"response": []
 		},
 		{
-			"name": "Delete Pet Order",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5ae6fa4a-2546-40ea-bca3-52a1293f58e1",
-						"exec": [
-							"//Getting response data",
-							"const jsonData = pm.response.json();",
-							"",
-							"//Test Cases",
-							"pm.test(\"Order has been deleted\", function () {",
-							"    console.log(\"Order ID deleted \"+ jsonData.message)",
-							"    pm.expect(jsonData.code).to.eql(200);",
-							"});",
-							"",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/order/{{orderId}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"order",
-						"{{orderId}}"
-					]
-				},
-				"description": "https://petstore.swagger.io/v2/store/order/1"
-			},
-			"response": []
-		},
-		{
 			"name": "Get Pet Order",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "34f8f119-bb31-4c23-958e-87d39cbb1b50",
 						"exec": [
 							""
 						],
@@ -185,7 +171,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "035cc338-1b32-4460-896d-8244966cbe67",
 						"exec": [
 							"//Getting response data",
 							"const orderData = pm.response.json();",
@@ -250,12 +235,58 @@
 			"response": []
 		},
 		{
+			"name": "Delete Pet Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Getting response data",
+							"const jsonData = pm.response.json();",
+							"",
+							"//Test Cases",
+							"pm.test(\"Order has been deleted\", function () {",
+							"    console.log(\"Order ID deleted \"+ jsonData.message)",
+							"    pm.expect(jsonData.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/order/{{orderId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"order",
+						"{{orderId}}"
+					]
+				},
+				"description": "https://petstore.swagger.io/v2/store/order/1"
+			},
+			"response": []
+		},
+		{
 			"name": "Get Pet Inventory",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "2040eef1-37a3-4ef4-a0f4-6ec60021b079",
 						"exec": [
 							"var response = pm.response.json();",
 							"",
@@ -320,52 +351,15 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "64f6c11b-fb3f-4d46-bb36-30e9378e5de5",
 				"type": "text/javascript",
 				"exec": [
-					"const dateNow= new Date();",
-					"",
-					"const orderStatus = [",
-					"    'placed',",
-					"    'approved',",
-					"    'delivered'",
-					"];",
-					"",
-					"pm.collectionVariables.set('currentDate', dateNow.toISOString());",
-					"pm.collectionVariables.set(\"id\", Math.floor(Math.random() * 100000));",
-					"pm.collectionVariables.set(\"petId\", Math.floor(Math.random() * 100));",
-					"pm.collectionVariables.set(\"petQuantity\", Math.floor(Math.random() * 100 + 1));",
-					"pm.collectionVariables.set(\"orderStatus\",  orderStatus[Math.floor(Math.random()*orderStatus.length)]);",
-					"pm.collectionVariables.set(\"orderComplete\", _.sample([true, false]) );",
-					"",
-					"const loginRequest = {",
-					"    url: 'https://petstore.swagger.io/v2/store/order',",
-					"    method: 'POST',",
-					"    header: 'Content-Type: application/json',",
-					"    body: {",
-					"        mode: 'application/json',",
-					"        raw: JSON.stringify({        ",
-					"            \"id\": pm.collectionVariables.get(\"id\"),",
-					"            \"petId\": pm.collectionVariables.get(\"petId\"),",
-					"            \"quantity\": pm.collectionVariables.get(\"petQuantity\"),",
-					"            \"shipDate\": pm.collectionVariables.get(\"currentDate\"),",
-					"            \"status\": pm.collectionVariables.get(\"orderStatus\"),",
-					"            \"complete\": pm.collectionVariables.get(\"orderComplete\"),",
-					"        })",
-					"    }",
-					"};",
-					"",
-					"",
-					"pm.sendRequest(loginRequest, function (err, response) {",
-					"    pm.collectionVariables.set(\"orderId\", response.json().id);",
-					"});"
+					""
 				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
-				"id": "e8977137-dd77-45aa-ac79-3e55643e8a0f",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -375,53 +369,36 @@
 	],
 	"variable": [
 		{
-			"id": "5c029d19-6edc-447f-aaac-4e05ce3eb0b9",
 			"key": "currentDate",
-			"value": "2020-10-16T17:24:08.472Z",
-			"type": "string"
+			"value": "2020-10-16T17:24:08.472Z"
 		},
 		{
-			"id": "a0a57a09-750f-43af-993e-c60607443b5e",
 			"key": "id",
-			"value": 7639,
-			"type": "number"
+			"value": 7639
 		},
 		{
-			"id": "74362f19-8319-48d1-abac-73830961ece5",
 			"key": "orderComplete",
-			"value": true,
-			"type": "boolean"
+			"value": true
 		},
 		{
-			"id": "48548f8d-ec3b-4190-94c2-9ff9b5081fd7",
 			"key": "orderStatus",
-			"value": "placed",
-			"type": "string"
+			"value": "placed"
 		},
 		{
-			"id": "31f624cc-0e28-4602-bb3a-3e120d988665",
 			"key": "petId",
-			"value": 61,
-			"type": "number"
+			"value": 61
 		},
 		{
-			"id": "1052fc8a-751f-4901-ae0b-f196d9db43b6",
 			"key": "petQuantity",
-			"value": 44,
-			"type": "number"
+			"value": 44
 		},
 		{
-			"id": "aaa53d9b-2fa8-40f0-8cb4-0db3ddd243f6",
 			"key": "orderId",
-			"value": 7639,
-			"type": "number"
+			"value": 7639
 		},
 		{
-			"id": "13aae59e-d90d-40ae-95a2-e4e4b154d71a",
 			"key": "url",
-			"value": "https://petstore.swagger.io/v2/store",
-			"type": "string"
+			"value": "https://petstore.swagger.io/v2/store"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

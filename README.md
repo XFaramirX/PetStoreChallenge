@@ -55,10 +55,6 @@ docker pull postman/newman;
 
 Run collection
 
-```
-docker run -t postman/newman run https://www.getpostman.com/collections/1f7eafe8fcba81325124
-```
-
 Run collection inside docker and update live report.
 
 ```

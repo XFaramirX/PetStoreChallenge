@@ -8,7 +8,7 @@
     "generateReport": "sh ./envsubst.sh | newman run src/collection.json  -r htmlextra --reporter-htmlextra-darkTheme && node main.js -e postman_env.json && npm run deleteEnvFile",
     "envTest": "sh ./envsubst.sh | newman run src/collection.json -e postman_env_exec.json && npm run deleteEnvFile",
     "dockerReport": "docker-compose up && node main.js",
-    "deleteEnvFile" : "rm -f postman_env_exec.json"
+    "deleteEnvFile": "rm -f postman_env_exec.json"
   },
   "keywords": [],
   "author": "",
